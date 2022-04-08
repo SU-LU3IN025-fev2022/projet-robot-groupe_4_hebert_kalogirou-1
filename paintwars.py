@@ -242,10 +242,10 @@ class Tile(SquareObject):  # CircleObject):
         robot = rob.controllers[id_]
         # print ("[TEST]", robot.get_id())
         if robot.team_name == "Team Red":
-            self.set_footprint_color(255, 240, 250)
+            self.set_footprint_color(255, 0, 0)
             self.owner = robot.team_name
         elif robot.team_name == "Team Blue":
-            self.set_footprint_color(240, 240, 255)
+            self.set_footprint_color(0, 0, 255)
             self.owner = robot.team_name
         return
 
