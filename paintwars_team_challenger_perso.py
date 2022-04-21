@@ -37,7 +37,7 @@ def step(robotId, sensors):
     
     def hateWall():
         translation = 1
-        rotation = (-1) * sensors["sensor_front_left"]["distance"] + (1) * sensors["sensor_front_right"]["distance"] + (-1) * sensors["sensor_left"]["distance"] + sensors["sensor_right"]["distance"]
+        rotation = (-1) * sensors["sensor_front_left"]["distance_to_wall"] + (1) * sensors["sensor_front_right"]["distance_to_wall"] + (-1) * sensors["sensor_left"]["distance_to_wall"] + sensors["sensor_right"]["distance_to_wall"]
         return translation, rotation
     
     def loveBot():
@@ -86,16 +86,7 @@ def step(robotId, sensors):
     
     elif sensors["sensor_front"]["distance_to_wall"] < 1:
         rotation = random.choice([-1, 1])
-        return translation, rotation
-    
-    elif sensors["sensor_front"]["distance"] < 0.2 or sensors["sensor_front_left"]["distance"] < 0.2 or sensors["sensor_front_right"]["distance"] < 0.2 :
-        if sensors["sensor_front_left"]["distance"] < sensors["sensor_front_right"]["distance"] : # Bloqué à  gauche
-            rotation = 1  
-
-        else: # Bloqué à droite
-            rotation = -1  
-
-        return translation , rotation 
+        return translation, rotation 
     
     else:
         return hateWall()
