@@ -32,7 +32,7 @@ def step(robotId, sensors):
     # comportements Braitenberg
     def hateBot():
         translation = sensors["sensor_front"]["distance_to_robot"]
-        rotation = (-1) * (sensors["sensor_front_left"]["distance_to_robot"] + sensors["sensor_left"]["distance_to_robot"]) + 1 * (sensors["sensor_front_right"]["distance_to_robot"] + sensors["sensor_right"]["distance_to_robot"])
+        rotation = (-1) * sensors["sensor_front_left"]["distance_to_robot"] + (1) * sensors["sensor_front_right"]["distance_to_robot"] + (-1) * sensors["sensor_back_left"]["distance_to_robot"] + (1) * sensors["sensor_back_right"]["distance_to_robot"] + (-1) * sensors["sensor_left"]["distance_to_robot"] + 1 * sensors["sensor_right"]["distance_to_robot"] + + 1 * sensors["sensor_front"]["distance_to_robot"] + -1 * sensors["sensor_back"]["distance_to_robot"]
         return translation, rotation
     
     def hateWall():
@@ -69,7 +69,8 @@ def step(robotId, sensors):
         rotation = -0.25
         return translation, rotation
     
-    return hateWall()
+    else:
+        return hateWall()
 
     # if sensors["sensor_front_left"]["distance"] < 1 or sensors["sensor_front"]["distance"] < 1:
     #     rotation = 0.5  # rotation vers la droite
