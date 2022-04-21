@@ -67,6 +67,11 @@ def step(robotId, sensors):
         return loveBot()
     
     # si on croise un chemin on le suit
+    elif (sensors["sensor_right"]["distance_to_wall"] < 1 and sensors["sensor_front_right"]["distance"] == 1)\
+    and (sensors["sensor_left"]["distance_to_wall"] < 1 and sensors["sensor_front_left"]["distance"] == 1):
+        rotation = random.choice([-0.25, 0.25])
+        return translation, rotation
+    
     elif sensors["sensor_right"]["distance_to_wall"] < 1 and sensors["sensor_front_right"]["distance"] == 1:
         rotation = 0.25
         return translation, rotation
