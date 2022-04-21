@@ -10,9 +10,9 @@ arenaIndexSelector = 3 # numéro de l'arène, entre 0 et 4
 invertStartingPosition = False # True: red commence à gauche. Sinon, commence à droite.
 
 # Red team
-import paintwars_team_challenger_perso # importer votre code
-get_name_red_team = paintwars_team_challenger_perso.get_team_name # mettre ici votre fonction get_team_name
-step_red_team = paintwars_team_challenger_perso.step # mettre ici votre fonction step
+import test # importer votre code
+get_name_red_team = test.get_team_name # mettre ici votre fonction get_team_name
+step_red_team = test.step # mettre ici votre fonction step
 
 # Blue team
 import paintwars_team_champion
