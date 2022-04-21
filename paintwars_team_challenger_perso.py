@@ -36,17 +36,12 @@ def step(robotId, sensors):
         return translation, rotation
     
     def hateWall():
-        translation = sensors["sensor_front"]["distance_to_wall"]
-        rotation = (-1) * sensors["sensor_front_left"]["distance_to_wall"] + (1) * sensors["sensor_front_right"]["distance_to_wall"] + (-1) * sensors["sensor_back_left"]["distance_to_wall"] + (1) * sensors["sensor_back_right"]["distance_to_wall"] + (-1) * sensors["sensor_left"]["distance_to_wall"] + 1 * sensors["sensor_right"]["distance_to_wall"] + + 1 * sensors["sensor_front"]["distance_to_wall"] + -1 * sensors["sensor_back"]["distance_to_wall"]
-        return translation, rotation
-    
-    def hateWall2():
-        translation = 1 * sensors["sensor_front"]["distance"]
+        translation = 1
         rotation = (-1) * sensors["sensor_front_left"]["distance"] + (1) * sensors["sensor_front_right"]["distance"] + (-1) * sensors["sensor_left"]["distance"] + sensors["sensor_right"]["distance"]
         return translation, rotation
     
     def loveBot():
-        translation = sensors["sensor_front"]["distance_to_robot"]
+        translation = 1
         rotation = 1 * sensors["sensor_front_left"]["distance_to_robot"] + (-1) *sensors["sensor_front_right"]["distance_to_robot"]
         return translation, rotation
     
@@ -69,7 +64,10 @@ def step(robotId, sensors):
     # si on croise un chemin on le suit
     elif (sensors["sensor_right"]["distance_to_wall"] < 1 and sensors["sensor_front_right"]["distance"] == 1)\
     and (sensors["sensor_left"]["distance_to_wall"] < 1 and sensors["sensor_front_left"]["distance"] == 1):
-        rotation = random.choice([-0.25, 0.25])
+        if sensors["sensor_front"]["distance_to_wall"] == 1:
+            rotation = random.choice([-0.25, 0, 0.25])
+        else:
+            rotation = random.choice([-0.25, 0.25])
         return translation, rotation
     
     elif sensors["sensor_right"]["distance_to_wall"] < 1 and sensors["sensor_front_right"]["distance"] == 1:
@@ -85,7 +83,7 @@ def step(robotId, sensors):
         return translation, rotation
     
     else:
-        return hateWall2()
+        return hateWall()
 
     # if sensors["sensor_front_left"]["distance"] < 1 or sensors["sensor_front"]["distance"] < 1:
     #     rotation = 0.5  # rotation vers la droite
