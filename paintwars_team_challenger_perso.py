@@ -71,11 +71,17 @@ def step(robotId, sensors):
         return translation, rotation
     
     elif sensors["sensor_right"]["distance_to_wall"] < 1 and sensors["sensor_front_right"]["distance"] == 1:
-        rotation = 0.25
+        if sensors["sensor_front"]["distance_to_wall"] == 1:
+            rotation = random.choice([0, 0.25])
+        else:
+            rotation = 0.25
         return translation, rotation
     
     elif sensors["sensor_left"]["distance_to_wall"] < 1 and sensors["sensor_front_left"]["distance"] == 1:
-        rotation = -0.25
+        if sensors["sensor_front"]["distance_to_wall"] == 1:
+            rotation = random.choice([0, -0.25])
+        else:
+            rotation = -0.25
         return translation, rotation
     
     elif sensors["sensor_front"]["distance_to_wall"] < 1:
