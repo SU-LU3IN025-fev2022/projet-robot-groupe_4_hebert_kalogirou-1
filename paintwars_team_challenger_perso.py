@@ -12,7 +12,7 @@ import random
 import paintwars_arena
 
 def get_team_name():
-    return "[ Midnight Suns ]" # à compléter (comme vous voulez)
+    return "Midnight Suns" # à compléter (comme vous voulez)
 
 def step(robotId, sensors):
 
@@ -52,7 +52,8 @@ def step(robotId, sensors):
     if (sensors["sensor_front"]["isRobot"] == True and sensors["sensor_front"]["isSameTeam"] == True) or (sensors["sensor_front_left"]["isRobot"] == True and sensors["sensor_front_left"]["isSameTeam"] == True)\
     or (sensors["sensor_front_right"]["isRobot"] == True and sensors["sensor_front_right"]["isSameTeam"] == True) or (sensors["sensor_left"]["isRobot"] == True and sensors["sensor_left"]["isSameTeam"] == True)\
     or (sensors["sensor_right"]["isRobot"] == True and sensors["sensor_right"]["isSameTeam"] == True):
-        return hateBot()
+        rotation = random.uniform(-1, 1)
+        return translation, rotation
 
     # si on croise un ennemi on le poursuit
     elif (sensors["sensor_front"]["isRobot"] == True and sensors["sensor_front"]["isSameTeam"] == False) or (sensors["sensor_front_left"]["isRobot"] == True and sensors["sensor_front_left"]["isSameTeam"] == False)\
