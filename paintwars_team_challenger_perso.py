@@ -75,6 +75,10 @@ def step(robotId, sensors):
         rotation = -0.25
         return translation, rotation
     
+    elif sensors["sensor_front"]["distance_to_wall"] < 1:
+        rotation = random.choice([-1, 1])
+        return translation, rotation
+    
     else:
         return hateWall2()
 
