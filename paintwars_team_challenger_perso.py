@@ -30,11 +30,6 @@ def step(robotId, sensors):
     sensors = get_extended_sensors(sensors)
     
     # comportements Braitenberg
-    def hateBot():
-        translation = sensors["sensor_front"]["distance_to_robot"]
-        rotation = (-1) * sensors["sensor_front_left"]["distance_to_robot"] + (1) * sensors["sensor_front_right"]["distance_to_robot"] + (-1) * sensors["sensor_back_left"]["distance_to_robot"] + (1) * sensors["sensor_back_right"]["distance_to_robot"] + (-1) * sensors["sensor_left"]["distance_to_robot"] + 1 * sensors["sensor_right"]["distance_to_robot"] + + 1 * sensors["sensor_front"]["distance_to_robot"] + -1 * sensors["sensor_back"]["distance_to_robot"]
-        return translation, rotation
-    
     def hateWall():
         translation = 1
         rotation = (-1) * sensors["sensor_front_left"]["distance_to_wall"] + (1) * sensors["sensor_front_right"]["distance_to_wall"] + (-1) * sensors["sensor_left"]["distance_to_wall"] + sensors["sensor_right"]["distance_to_wall"]
@@ -84,20 +79,11 @@ def step(robotId, sensors):
             rotation = -0.25
         return translation, rotation
     
+    # on esquive les murs devant
     elif sensors["sensor_front"]["distance_to_wall"] < 1:
         rotation = random.choice([-1, 1])
         return translation, rotation 
     
+    # on évite les murs avec le comportement de braitenberg
     else:
         return hateWall()
-
-    # if sensors["sensor_front_left"]["distance"] < 1 or sensors["sensor_front"]["distance"] < 1:
-    #     rotation = 0.5  # rotation vers la droite
-    # elif sensors["sensor_front_right"]["distance"] < 1:
-    #     rotation = -0.5  # rotation vers la gauche
-
-    # if sensors["sensor_front"]["isRobot"] == True and sensors["sensor_front"]["isSameTeam"] == False:
-    #     enemy_detected_by_front_sensor = True # exemple de détection d'un robot de l'équipe adversaire (ne sert à rien)
-
-
-    return translation, rotation
