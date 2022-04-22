@@ -5,6 +5,7 @@ from pyroborobo import Pyroborobo, Controller, AgentObserver, WorldObserver, Cir
 # from custom.controllers import SimpleController, HungryController
 import numpy as np
 import random
+import sys
 
 from paintwars_config import *
 
@@ -242,10 +243,12 @@ class Tile(SquareObject):  # CircleObject):
         robot = rob.controllers[id_]
         # print ("[TEST]", robot.get_id())
         if robot.team_name == "Team Red":
-            self.set_footprint_color(255, 0, 0)
+            #self.set_footprint_color(255, 240, 240)
+            self.set_footprint_color(255, 168, 181)
             self.owner = robot.team_name
         elif robot.team_name == "Team Blue":
-            self.set_footprint_color(0, 0, 255)
+            #self.set_footprint_color(240, 240, 255)
+            self.set_footprint_color(131, 238, 255)
             self.owner = robot.team_name
         return
 
@@ -269,7 +272,23 @@ class BlockObject(SquareObject):
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 def main():
-    global rob
+    global rob, arenaIndexSelector, invertStartingPosition, simulation_mode
+
+    #print(f"Name of the script   : {sys.argv[0]=}")
+    #print(f"Arguments            : {sys.argv[1:]=}")
+
+    if len(sys.argv) == 4:
+        print ("## Using command-line parameters ##")
+        print ("arena          :",int(sys.argv[1]))
+        arenaIndexSelector = int(sys.argv[1])
+        print ("invert position:",sys.argv[2])
+        invertStartingPosition = True if sys.argv[2] == "True" or  sys.argv[2] == "true" else False
+        print ("simulation mode:",int(sys.argv[3]))
+        simulation_mode = int(sys.argv[3])
+    elif len(sys.argv) > 1:
+        print ("Syntax :", sys.argv[0],"arena_number invert_position simulation_mode")
+        print ("Example:", sys.argv[0],"3 True 1")
+        exit(0)
 
     rob = Pyroborobo.create(
         "config/paintwars.properties",
@@ -305,17 +324,26 @@ def main():
     print("")
 
     s = ""
+    winner = ""
     if scores["Team Red"] > scores["Team Blue"]:
-        s += "# Team RED won! Congratulations " + get_name_red_team() + " ! #"
+        winner = get_name_red_team()
+        s += "# Team RED won! Congratulations " + winner + " ! #"
     elif scores["Team Red"] < scores["Team Blue"]:
-        s += "# Team BLUE won! Congratulations " + get_name_blue_team() + " ! #"
+        winner = get_name_blue_team()
+        s += "# Team BLUE won! Congratulations " + winner + " ! #"
     else:
+        winner = "nobody!"
         s += "Draw! (no winner)"
 
     print (len(s)*"#")
     print (s)
     print (len(s)*"#")
     print("")
+    print("")
+
+    summary = "arena="+str(arenaIndexSelector)+" invert_position="+str(invertStartingPosition)+" winner=\""+winner+"\""
+    if len(sys.argv) == 4:
+        print(summary)
 
 if __name__ == "__main__":
     main()
