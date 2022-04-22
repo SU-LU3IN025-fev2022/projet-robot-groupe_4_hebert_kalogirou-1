@@ -1,8 +1,8 @@
 # Projet "robotique" IA&Jeux 2021
 #
 # Binome:
-#  Prénom Nom: Thomas Hebert0
-#  Prénom Nom: _________
+#  Prénom Nom: Thomas Hebert
+#  Prénom Nom: Vasiliki Eirini Kalogirou
 
 from pyroborobo import Pyroborobo, Controller, AgentObserver, WorldObserver, CircleObject, SquareObject, MovableObject
 # from custom.controllers import SimpleController, HungryController
